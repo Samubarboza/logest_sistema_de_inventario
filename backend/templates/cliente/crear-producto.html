@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles-inventario.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="{{ url_for('static', filename='css/all.min.css') }}" rel="stylesheet">
+</head>
+<body class="panel-container">
+
+    <header class="modern-header">
+        <div class="header-left">
+            <h1 class="logo-text">
+                <a href="{{ url_for('cliente.perfil') }}" class="back-arrow">
+                    <i class="fas fa-arrow-left" title="Volver al menú"></i>
+                </a>
+                Inventario
+            </h1>
+            
+            <nav class="header-nav">
+                <ul class="main-menu">
+                    <li class="menu-item">
+                        <span>Información general</span>
+                        <ul class="sub-menu">
+                            <li><a href="#">Vista general</a></li>
+                            <li><a href="#">Estadísticas</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <span>Productos</span>
+                        <ul class="sub-menu">
+                            <li><a href="#">Listado</a></li>
+                            <li><a href="#">Nuevo producto</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <span>Informes</span>
+                        <ul class="sub-menu">
+                            <li><a href="#">Reporte diario</a></li>
+                            <li><a href="#">Mensual</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Botón hamburguesa moderno -->
+        <button class="hamburger" aria-label="Menú">
+            <div class="hamburger__inner"></div>
+        </button>
+        
+        <div class="header-right">
+            <span class="user-name">Hola, {{ current_user.usuario_usuario }}</span>
+        </div>
+    </header>
+    
+
+    
+<div class="odoo-form-container">
+    <form method="POST" action="{{ url_for('inventario.guardar_producto') }}" enctype="multipart/form-data">
+    <div class="odoo-form-header">
+        <h1 class="odoo-form-title">Crear Producto</h1>
+        <div class="odoo-form-actions">
+            <button type="submit" class="odoo-btn odoo-btn-secondary">Descartar</button>
+            <button type="submit" class="odoo-btn odoo-btn-primary">Guardar</button>
+        </div>
+    </div>
+
+    <div class="odoo-form-content">
+        <div class="odoo-form-sheet">
+            <!-- Sección General -->
+            <div class="odoo-form-group">
+                <div class="odoo-form-row">
+                    <div class="odoo-form-col odoo-form-col-6">
+                        <label class="odoo-form-label">Nombre del producto</label>
+                        <input type="text" name="nombre_producto" class="odoo-form-input" placeholder="Ej: Mesa de oficina">
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Referencia interna</label>
+                        <input type="text" name="referencia_interna" class="odoo-form-input" placeholder="Código interno">
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Referencia del fabricante</label>
+                        <input type="text" name="referencia_fabricante" class="odoo-form-input" placeholder="Código del fabricante">
+                    </div>
+                </div>
+
+                <div class="odoo-form-row">
+                    <div class="odoo-form-col odoo-form-col-6">
+                        <label class="odoo-form-label">Categoría</label>
+                        <input type="text" name="categoria" class="odoo-form-input" placeholder="Ej: Propios">
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Tipo de producto</label>
+                        <select class="odoo-form-select" name="tipo_producto">
+                            <option value="consu">Consumible</option>
+                            <option value="service">Servicio</option>
+                            <option value="product" selected>Almacenable</option>
+                        </select>
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Unidad de medida</label>
+                        <select class="odoo-form-select" name="unidad_medida">
+                            <option value="uom">Unidades</option>
+                            <option value="kg">Kilogramos</option>
+                            <option value="l">Litros</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Compra -->
+            <div class="odoo-form-group">
+                <h3 class="odoo-form-section-title">Compra</h3>
+                <div class="odoo-form-row">
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Precio de compra</label>
+                        <input type="number" name="precio_compra" class="odoo-form-input" placeholder="0.00">
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Impuesto de compra</label>
+                        <select class="odoo-form-select" required name="impuesto_compra">
+                            <option value="">Ninguno</option>
+                            <option value="1">IVA 10%</option>
+                            <option value="2">IVA 5%</option>
+                            <option value="2">EXENTA</option>
+                        </select>
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-6">
+                        <label class="odoo-form-label">Proveedor</label>
+                        <select class="odoo-form-select" name="proveedor">
+                            <option value="">Seleccionar proveedor</option>
+                            <option value="1">Proveedor A</option>
+                            <option value="2">Proveedor B</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Venta -->
+            <div class="odoo-form-group">
+                <h3 class="odoo-form-section-title">Venta</h3>
+                <div class="odoo-form-row">
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Precio de venta</label>
+                        <input type="number" name="precio_venta" class="odoo-form-input" placeholder="0.00">
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Impuesto de venta</label>
+                        <select class="odoo-form-select" required name="impuesto_venta">
+                            <option value="">Ninguno</option>
+                            <option value="1">IVA 10%</option>
+                            <option value="2">IVA 5%</option>
+                            <option value="3">EXENTA</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Inventario -->
+            <div class="odoo-form-group">
+                <h3 class="odoo-form-section-title">Inventario</h3>
+                <div class="odoo-form-row">
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Cantidad disponible</label>
+                        <input type="number" name="cantidad_disponible" class="odoo-form-input" placeholder="0" disabled>
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Almacén</label>
+                        <select class="odoo-form-select" name="almacen">
+                            <option value="">Principal</option>
+                        </select>
+                    </div>
+                    <div class="odoo-form-col odoo-form-col-3">
+                        <label class="odoo-form-label">Ubicación</label>
+                        <select class="odoo-form-select" name="ubicacion">
+                            <option value="">Estantería A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="odoo-form-row">
+                <div class="odoo-form-col odoo-form-col-12">
+                    <label class="odoo-form-label">Imagen del producto</label>
+                    <div class="odoo-image-upload">
+                        <input type="file" id="product-image" name="imagen" accept="image/*" class="odoo-image-input">
+                        <label for="product-image" class="odoo-image-label">
+                            <i class="fas fa-camera"></i>
+                            <span>Subir imagen</span>
+                        </label>
+                        <div class="odoo-image-preview"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sección Notas -->
+            <div class="odoo-form-group">
+                <h3 class="odoo-form-section-title">Notas</h3>
+                <div class="odoo-form-row">
+                    <div class="odoo-form-col odoo-form-col-12">
+                        <textarea class="odoo-form-textarea" name="notas" placeholder="Añadir descripción interna..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+    
+
+    
+    <script src="{{ url_for('static', filename='js-inventario.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

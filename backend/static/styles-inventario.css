@@ -1,0 +1,755 @@
+/* Variables de color */
+:root {
+    --header-bg: #1e293b;
+    --text-color: #ffffff;
+    --accent-color: #38bdf8;
+    --menu-bg: rgba(30, 41, 59, 0.98);
+    --overlay-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Reset y estilos generales */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Header principal */
+.modern-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--header-bg);
+    padding: 1rem 2rem;
+    color: var(--text-color);
+    position: relative;
+    z-index: 1000;
+    
+}
+
+/* Contenedor izquierdo (logo + menú) */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-grow: 1;
+}
+
+/* Logo */
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+/* Estilos para el ícono de flecha */
+.back-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+}
+
+.back-arrow i {
+    font-size: 2rem;
+    color: white;
+}
+
+.back-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-2px);
+}
+
+/* Menú principal - versión desktop */
+.header-nav {
+    display: block;
+}
+
+.main-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+}
+
+.menu-item {
+    position: relative;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.3rem 0;
+    list-style: none;
+}
+
+.menu-item > span {
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: block;
+}
+/* Color de los elementos del menu*/
+.menu-item:hover > span {
+    color: var(--accent-color);
+    background: rgba(3, 77, 4, 0.1);
+    border-radius: 7.5px;
+}
+
+/* Submenús */
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    list-style: none;
+}
+
+.menu-item:hover .sub-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sub-menu li {
+    padding: 0;
+    list-style: none;
+}
+
+.sub-menu li a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    margin: 0.2rem 0;
+}
+
+.sub-menu li a:hover {
+    color: var(--accent-color);
+    background: rgba(3, 77, 4, 0.1);
+}
+
+/* Usuario a la derecha */
+.header-right {
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-left: 2rem;
+}
+
+.user-name {
+    white-space: nowrap;
+}
+
+/* ==================== */
+/* HAMBURGUESA MODERNO Y ELEGANTE */
+/* ==================== */
+.hamburger {
+    display: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+}
+
+.hamburger__inner {
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.hamburger__inner::before,
+.hamburger__inner::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.hamburger__inner::before {
+    top: -8px;
+}
+
+.hamburger__inner::after {
+    bottom: -8px;
+}
+
+/* Estado activo */
+.hamburger.active .hamburger__inner {
+    background: transparent;
+}
+
+.hamburger.active .hamburger__inner::before {
+    transform: translateY(8px) rotate(45deg);
+    background: var(--accent-color);
+}
+
+.hamburger.active .hamburger__inner::after {
+    transform: translateY(-8px) rotate(-45deg);
+    background: var(--accent-color);
+}
+
+/* ==================== */
+/* VERSIÓN MÓVIL */
+/* ==================== */
+@media (max-width: 992px) {
+    .modern-header {
+        padding: 1rem;
+    }
+    
+    .header-left {
+        gap: 1rem;
+    }
+    
+    /* Mostrar hamburguesa */
+    .hamburger {
+        display: block;
+    }
+    
+    /* Ocultar menú principal en móvil */
+    .header-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--menu-bg);
+        backdrop-filter: blur(10px);
+        padding: 80px 20px 20px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .header-nav.active {
+        right: 0;
+    }
+    
+    /* Estructura del menú móvil */
+    .main-menu {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .menu-item {
+        padding: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .menu-item > span {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+    }
+    
+    /* Submenús en móvil */
+    .sub-menu {
+        position: static;
+        display: none;
+        width: 100%;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0 0 0 1rem;
+        margin: 0;
+        opacity: 1;
+        transform: none;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .menu-item:hover .sub-menu {
+        display: none;
+    }
+    
+    .sub-menu.active {
+        display: block;
+    }
+    
+    .sub-menu li a {
+        padding: 0.75rem 0;
+    }
+    
+    /* Ocultar usuario en pantallas pequeñas */
+    @media (max-width: 768px) {
+        .header-right {
+            display: none;
+        }
+    }
+    
+    /* Overlay transparente */
+    .header-nav::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--overlay-color);
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .header-nav.active::before {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+
+
+.contenedor-productos {
+    padding: 2rem;
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.producto-card {
+    background-color: var(--bg-light);
+    box-shadow: var(--shadow);
+    border-radius: 16px;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background-color 0.3s;
+    width: 100%;
+    max-width: 220px;
+    min-height: 160px;
+}
+
+.producto-card:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.producto-card img {
+    max-width: 60%;
+    border-radius: 8px;
+}
+
+
+.producto-nombre {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.producto-precio, .producto-stock {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+
+.btn-crear-producto {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ffffff; /* Color púrpura estilo Odoo */
+    color: #ffffff;
+    border-radius: 6px;
+    background-color: transparent;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    margin-bottom: 20px;
+    margin-top: 2%;
+    margin-left: 5%; /* 5% del ancho de la pantalla, dejando espacio */
+}
+
+/* Asegurar que en pantallas más grandes no se haga más grande */
+@media (min-width: 1024px) {
+    .btn-crear-producto {
+        display: inline-block; /* Mantener el tamaño original */
+        margin-left: 5%; /* Asegura que siempre tenga espacio a la izquierda */
+    }
+}
+
+/* En pantallas pequeñas, el botón se ajustará automáticamente */
+@media (max-width: 1024px) {
+    .btn-crear-producto {
+        display: inline-block;
+        margin-left: 5%; /* Margen izquierdo para no pegarse al borde */
+    }
+}
+
+.btn-crear-producto:hover {
+    background: rgba(3, 75, 5, 0.267);
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+/* Estructura principal */
+.odoo-form-container {
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    overflow: hidden;
+}
+
+.odoo-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.odoo-form-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #4c4c4c;
+    margin: 0;
+}
+
+.odoo-form-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Botones */
+.odoo-btn {
+    padding: 8px 16px;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.odoo-btn-primary {
+    background-color: #047e72;
+    color: white;
+    border-color: #0ac5b5;
+}
+
+.odoo-btn-primary:hover {
+    background-color: rgb(1, 53, 3);
+    border-color: rgba(3, 75, 5, 0.267);
+}
+
+.odoo-btn-secondary {
+    background-color: #fff;
+    color: #4c4c4c;
+    border-color: #d9d9d9;
+}
+
+.odoo-btn-secondary:hover {
+    background-color: #cacacac6;
+}
+
+/* Contenido del formulario */
+.odoo-form-content {
+    padding: 16px;
+    background-color: #fff;
+}
+
+.odoo-form-sheet {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Grupos y secciones */
+.odoo-form-group {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.odoo-form-group:last-child {
+    border-bottom: none;
+}
+
+.odoo-form-section-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4c4c4c;
+    margin-bottom: 16px;
+}
+
+/* Filas y columnas */
+.odoo-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px 16px;
+}
+
+.odoo-form-col {
+    padding: 0 8px;
+    margin-bottom: 16px;
+}
+
+.odoo-form-col-12 { width: 100%; }
+.odoo-form-col-6 { width: 50%; }
+.odoo-form-col-4 { width: 33.333%; }
+.odoo-form-col-3 { width: 25%; }
+
+/* Elementos del formulario */
+.odoo-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.odoo-form-input,
+.odoo-form-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    transition: border-color 0.3s;
+}
+
+.odoo-form-input:focus,
+.odoo-form-select:focus {
+    outline: none;
+    border-color: #000000;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.odoo-form-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    resize: vertical;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .odoo-form-col-6,
+    .odoo-form-col-4,
+    .odoo-form-col-3 {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .odoo-form-col-6,
+    .odoo-form-col-4,
+    .odoo-form-col-3 {
+        width: 100%;
+    }
+    
+    .odoo-form-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .odoo-form-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 576px) {
+    .odoo-form-container {
+        margin: 8px;
+    }
+    
+    .odoo-form-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .odoo-btn {
+        width: 100%;
+    }
+}
+
+
+/* Estilos para el upload de imagen */
+.odoo-image-upload {
+    border: 2px dashed #d9d9d9;
+    border-radius: 3px;
+    padding: 20px;
+    text-align: center;
+}
+
+.odoo-image-input {
+    display: none;
+}
+
+.odoo-image-label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.odoo-image-label i {
+    font-size: 24px;
+}
+
+.odoo-image-preview {
+    margin-top: 16px;
+}
+
+.odoo-image-preview img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 3px;
+}
+
+
+
+
+
+
+
+
+
+/* Estilos del menú de opciones */
+.menu-opciones {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 50;
+}
+
+.producto-card {
+    position: relative;
+}
+
+/* Botón de los tres puntos */
+.menu-opciones button {
+    background: rgba(120, 120, 120, 0.087);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 2px 10px;
+    color: grey;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.menu-opciones button:hover {
+    background: rgba(56, 189, 248, 0.7);
+    color: white;
+}
+
+/* Menú desplegable */
+.menu-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    backdrop-filter: blur(12px);
+    background-color: rgba(30, 41, 59, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.menu-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilo unificado para ambos botones */
+.menu-dropdown .dropdown-item {
+    padding: 0.6rem 1.5rem;
+    color: var(--text-color);
+    display: block;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.menu-dropdown .dropdown-item:hover {
+    color: var(--accent-color);
+    background: rgba(56, 189, 248, 0.1);
+}
+
+/* Estado activo del botón */
+.menu-opciones button.menu-active {
+    color: var(--accent-color);
+    background: rgba(56, 189, 248, 0.1);
+}

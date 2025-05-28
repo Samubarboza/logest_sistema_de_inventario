@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles-inventario.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="{{ url_for('static', filename='css/all.min.css') }}" rel="stylesheet">
+</head>
+<body class="panel-container">
+
+    <header class="modern-header">
+        <div class="header-left">
+            <h1 class="logo-text">
+                <a href="{{ url_for('cliente.perfil') }}" class="back-arrow">
+                    <i class="fas fa-arrow-left" title="Volver al menú"></i>
+                </a>
+                Inventario
+            </h1>
+            
+            <nav class="header-nav">
+                <ul class="main-menu">
+                    <li class="menu-item">
+                        <span>Información general</span>
+                        <ul class="sub-menu">
+                            <li><a href="#">Vista general</a></li>
+                            <li><a href="#">Estadísticas</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <span>Productos</span>
+                        <ul class="sub-menu">
+                            <li><a href="#">Listado</a></li>
+                            <li><a href="#">Nuevo producto</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <span>Informes</span>
+                        <ul class="sub-menu">
+                            <li><a href="#">Reporte diario</a></li>
+                            <li><a href="#">Mensual</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Botón hamburguesa moderno -->
+        <button class="hamburger" aria-label="Menú">
+            <div class="hamburger__inner"></div>
+        </button>
+        
+        <div class="header-right">
+            <span class="user-name">Hola, {{ current_user.usuario_usuario }}</span>
+        </div>
+    </header>
+    <div>
+        <a href="{{ url_for('cliente.crear_producto') }}" class="btn-crear-producto">Crear</a>
+    </div>
+    
+
+    <main class="contenedor-productos">
+    {% if productos %}
+        <div class="productos-grid">
+            {% for producto in productos %}
+                <div class="producto-card module-box">
+                    <div class="menu-opciones">
+                        <button onclick="toggleMenu(this)">⋮</button>
+                            <div class="menu-dropdown">
+                                <a href="{{ url_for('cliente.editar_producto', id=producto.id) }}" class="dropdown-item">Editar</a>
+                                <form action="{{ url_for('cliente.eliminar_producto', id=producto.id) }}"method="POST" style="display: inline;">
+                                    <button type="submit" class="dropdown-item" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
+                                </form>
+                            </div>
+                    </div>
+
+                    {% if producto.imagen %}
+                    <img src="{{ url_for('static', filename=producto.imagen) }}" alt="Producto">
+                    {% else %}
+                    <p>No hay imagen</p>
+                    {% endif %}
+
+                    <h2 class="producto-nombre">{{ producto.nombre }}</h2>
+                    <p class="producto-precio">Precio: Gs {{ "{:,.2f}".format(producto.precio_venta).replace(",", "X").replace(".", ",").replace("X", ".") }}</p>
+                    <p class="producto-precio">Referencia Interna: {{ producto.referencia_interna }}</p>
+                    <p class="producto-stock">En stock: {{ producto.cantidad_disponible }} unidades</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay productos cargados.</p>
+    {% endif %}
+</main>
+
+    
+
+    <footer><h3>© 2025. Todos los derechos reservados.</h3></footer>
+    <script src="{{ url_for('static', filename='js-inventario.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

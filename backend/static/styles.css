@@ -1,0 +1,628 @@
+
+:root {
+    --primary-color: #0ac5b5;
+    --primary-dark: #047e72;
+    --secondary-color: #e53e3e;
+    --secondary-dark: #8c2626;
+    --text-dark: #000000;
+    --bg-light: white;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(circle, var(--primary-color) 0%, var(--primary-dark) 100%);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    color: #333333;
+    margin: 1rem 0;
+    font-size: 2.5rem;
+    
+    
+}
+
+.logo, .admin-logo {
+    display: flexbox;
+    align-items: center;
+    position: absolute;
+    top: 22.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+}
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    letter-spacing: 2px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 100%;
+    max-width: 350px;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: white;
+    text-align: center;
+}
+
+.home h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.home input {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 6.5px;
+    border: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.home input::placeholder {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.home button {
+    font-size: 1.2rem;
+    border-radius: 7px;
+    background-color: #00c853;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.home button:hover {
+    background-color: #00e676;
+}
+
+.error-msg {
+    color: #ff5252;
+    font-size: 1rem;
+    display: block;
+    margin: 10px 0;
+}
+
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer h3 {
+    color: var(--text-dark);
+    margin: 0;
+    font-size: 1rem;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    letter-spacing: 2px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+  /* Estilos para el panel empresarial */
+.panel-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+  /* Header */
+.header {
+    background-color: var(--bg-light);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header span {
+    margin-right: 1rem;
+    color: var(--text-dark);
+}
+
+  /* Botón hamburguesa (solo visible en móvil) */
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-dark);
+    padding: 0.5rem;
+}
+
+  /* Contenido principal */
+.main-content {
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+  /* Menú lateral */
+.sidebar {
+    background-color: var(--bg-light);
+    box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+    width: 250px;
+    height: calc(100vh - 60px);
+    padding: 1rem;
+    position: sticky;
+    top: 60px;
+    transition: transform 0.3s ease;
+    z-index: 900;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #f0f0f0;
+}
+
+  /* Contenido principal */
+.content {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+  /* Tarjetas de estadísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--bg-light);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    border-radius: 5px;
+}
+
+.stat-card h3 {
+    color: var(--text-gray);
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+  /* Formularios */
+.formulario-admin {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-admin input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.formulario-admin input::placeholder {
+    color: #888;
+}
+
+.formulario-admin button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-dark);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formulario-admin button:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-log-out {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-log-out:hover {
+    background-color: var(--secondary-dark);
+}
+
+  /* Overlay para el menú móvil */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 800;
+    display: none;
+}
+
+  /* Media Queries para pantallas pequeñas (menú hamburguesa) */
+@media (max-width: 768px) {
+    .hamburger-btn {
+        display: block;
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        transform: translateX(-100%);
+        height: calc(100vh - 60px);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .overlay.active {
+        display: block;
+    }
+    
+    .content {
+        padding: 1rem;
+    }
+}
+
+@media (min-width: 980px) {
+    .logo {
+        max-width: 30%;
+    }
+    
+    .admin-logo {
+        max-width: 13%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modern-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background-color: transparent; /* Fondo totalmente transparente */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para definición */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Sutil línea en la parte inferior */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    margin: 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.user-name {
+    font-size: 1rem;
+    color: white;
+}
+
+.btn-log-out {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-log-out:hover {
+    background-color: var(--secondary-dark);
+}
+
+.hamburger-btn {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+.modulos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    justify-items: center;
+}
+
+.module-box {
+    background-color: var(--bg-light);
+    box-shadow: var(--shadow);
+    border-radius: 16px;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background-color 0.3s;
+    width: 100%;
+    max-width: 220px;
+    min-height: 160px;
+}
+
+.module-box i {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.module-box span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.module-box:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.module-box:hover i {
+    color: white;
+}
+
+
+
+
+/* Media Queries para pantallas pequeñas (menú hamburguesa) */
+@media (max-width: 768px) {
+    /* Hacer que el menú hamburguesa se vea */
+    .hamburger-btn {
+        display: block;
+    }
+
+    /* Barra lateral (sidebar) en móviles */
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        transform: translateX(-100%);
+        height: calc(100vh - 60px);
+        width: 80%;
+        transition: transform 0.3s ease;
+    }
+
+    /* Cuando está activa, mostrarla */
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .overlay.active {
+        display: block;
+    }
+
+    /* Modificación de contenido para que se vea bien en móviles */
+    .content {
+        padding: 1rem;
+    }
+
+    /* Asegurar que los módulos se apilen en una columna en pantallas pequeñas */
+    .modulos {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    /* Los módulos deben tener más espacio entre sí */
+    .module-box {
+        max-width: 100%;
+        min-height: auto;
+        padding: 1.5rem;
+    }
+
+    /* Logo y header ajustado para móviles */
+    .modern-header {
+        padding: 1rem;
+        justify-content: space-between;
+    }
+
+    .logo-text {
+        font-size: 1.4rem;
+    }
+
+    .hamburger-btn {
+        font-size: 1.8rem;
+    }
+
+    /* Ajustar el footer para que no se pegue a la parte inferior en móviles */
+    footer h3 {
+        font-size: 0.9rem;
+    }
+}
+
+/* Media Queries para pantallas medianas a grandes (desktops y tabletas grandes) */
+@media (min-width: 768px) {
+    /* Menú lateral visible de manera normal */
+    .sidebar {
+        position: sticky;
+        transform: translateX(0);
+        width: 250px;
+    }
+
+    /* Módulos en varias columnas */
+    .modulos {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    /* Ajuste del contenido */
+    .content {
+        padding: 2rem;
+    }
+
+    /* Hacer que los módulos no se estiren en pantallas grandes */
+    .module-box {
+        max-width: 220px;
+        min-height: 160px;
+    }
+
+    /* Header fijo en la parte superior */
+    .modern-header {
+        padding: 1.5rem 3rem;
+    }
+
+    /* Modificar el logo para pantallas más grandes */
+    .logo-text {
+        font-size: 1.8rem;
+    }
+
+    /* Evitar que el footer se sobreponga */
+    footer {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

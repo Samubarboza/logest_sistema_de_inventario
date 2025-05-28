@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Aplicacion</title>
+</head>
+<body>
+    <h1>Logest</h1>
+    <img src="{{ url_for('static', filename='admin-logo.jpg') }}" class="admin-logo" alt="Logo">
+    <div class="home">
+        <form action="{{ url_for('auth.login_admin') }}" method="POST">
+            <h2>Iniciar Sesión</h2>
+            <input type="text" name="usuario" placeholder="Usuario"><br>
+            {% if error_login %}
+            <strong class="error-msg">{{ error_login }}</strong>
+            {% endif %}
+            <input type="password" name="password" placeholder="Contraseña"><br>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+    
+    <footer><h3>© 2025. Todos los derechos reservados.</h3></footer>
+</body>
+</html>
